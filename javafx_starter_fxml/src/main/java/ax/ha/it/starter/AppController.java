@@ -1,7 +1,11 @@
 package ax.ha.it.starter;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class AppController {
 

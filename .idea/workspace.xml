@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="949d8a2c-b3a1-4dc0-8080-b1cc337136f4" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1lPe91STyjmJu6Wnn0KDbgtFxQv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Starter" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="949d8a2c-b3a1-4dc0-8080-b1cc337136f4" name="Default Changelist" comment="" />
+      <created>1607502998267</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607502998267</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1060" y="514" key="#Project_Structure" timestamp="1607505124359">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-1060" y="514" key="#Project_Structure/0.0.2560.1400/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1607505124359" />
+    <state x="-1080" y="595" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607504693333">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-1080" y="595" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1607504693333" />
+    <state x="-760" y="695" key="FileChooserDialogImpl" timestamp="1607505488305">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-760" y="695" key="FileChooserDialogImpl/0.0.2560.1400/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1607505488305" />
+    <state x="-1039" y="585" key="SettingsEditor" timestamp="1607504794642">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-1039" y="585" key="SettingsEditor/0.0.2560.1400/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1607504794642" />
+    <state x="-949" y="601" key="new project wizard" timestamp="1607503413080">
+      <screen x="-1080" y="0" width="1080" height="1880" />
+    </state>
+    <state x="-949" y="601" key="new project wizard/0.0.2560.1400/-1080.0.1080.1880@-1080.0.1080.1880" timestamp="1607503413080" />
+  </component>
+</project>
