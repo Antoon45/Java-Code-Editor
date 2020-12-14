@@ -37,10 +37,7 @@
                   </ScrollPane>
                </children>
             </AnchorPane>
-<<<<<<< HEAD
-=======
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS">
->>>>>>> 111abf903c83645be79ff0aa62f552b1634aa710
               <tabs>
                 <Tab text="Untitled Tab 1">
                      <content>
