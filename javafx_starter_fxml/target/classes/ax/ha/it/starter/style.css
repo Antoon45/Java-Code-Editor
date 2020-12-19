@@ -17,7 +17,7 @@
 }
 
 .thumb:hover {
--fx-background-color: grey;
+    -fx-background-color: grey;
 }
 
 
@@ -62,7 +62,6 @@
 
 
 /*MenuBar*/
-
 .menu-item .label {
     -fx-text-fill: black;
 }
