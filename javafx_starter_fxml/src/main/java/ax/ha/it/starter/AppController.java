@@ -18,18 +18,29 @@ import java.util.concurrent.Executors;
 public class AppController {
 
     private static final int THREADS_AVAILABLE = Runtime.getRuntime().availableProcessors();
+
     //Controllers
     @FXML
     static AppController mainController;
+
     //FX Views
     @FXML
     private TextArea resultTextArea;
     @FXML
     private TabPane codeAreaLayout;
+
     //File Menu Items
     @FXML
     private MenuItem openFileMenuItem;
+    @FXML
+    private MenuItem exitMenuItem;
+
     private ExecutorService executorService;
+
+    @FXML
+    private void kill(){
+        System.exit(0);
+    }
 
     public void initialize() {
         onMenuItemsActions();
@@ -38,6 +49,7 @@ public class AppController {
     }
 
     private void onMenuItemsActions() {
+        exitMenuItem.setOnAction(event -> kill());
         openFileMenuItem.setOnAction(event -> openFileAction());
     }
 
@@ -63,10 +75,10 @@ public class AppController {
         newTab.setUserData(sourceFile.getPath());
 
         CodeArea codeTextArea = new CodeArea();
-
         Editor editorController = new Editor(codeTextArea, resultTextArea);
 
         try {
+            editorController.codeAreaHighlighter();
             StringBuilder code = new StringBuilder();
             List<String> codeLines = Files.readAllLines(Path.of(sourceFile.getPath()), Charset.defaultCharset());
             for (String s : codeLines) {
@@ -77,10 +89,7 @@ public class AppController {
             newTab.setContent(scrollArea);
             scrollArea.fitToWidthProperty().set(true);
             scrollArea.fitToHeightProperty().set(true);
-            editorController.codeAreaHighlighter(); // Does currently not work, might be cause it doesn't find the proper css file
-            Platform.runLater(() -> {
-                codeAreaLayout.getTabs().add(newTab);
-            });
+            Platform.runLater(() -> codeAreaLayout.getTabs().add(newTab));
         } catch (IOException e) {
             System.out.println("Can't open file");
         }
