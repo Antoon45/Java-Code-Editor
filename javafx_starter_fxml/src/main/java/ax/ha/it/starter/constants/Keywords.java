@@ -3,11 +3,11 @@ package ax.ha.it.starter.constants;
 import java.util.regex.Pattern;
 
 /*
-* Class taken from demo version
-* https://github.com/FXMisc/RichTextFX/blob/master/richtextfx-demos/src/main/java/org/fxmisc/richtext/demo/JavaKeywordsAsyncDemo.java
-* */
+ * Class taken from demo version
+ * https://github.com/FXMisc/RichTextFX/blob/master/richtextfx-demos/src/main/java/org/fxmisc/richtext/demo/JavaKeywordsAsyncDemo.java
+ * */
 public class Keywords {
-    public static final String[] KEYWORDS = new String[] {
+    public static final String[] KEYWORDS = new String[]{
             "abstract", "assert", "boolean", "break", "byte",
             "case", "catch", "char", "class", "const",
             "continue", "default", "do", "double", "else",
