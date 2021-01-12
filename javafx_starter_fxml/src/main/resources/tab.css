@@ -2,23 +2,19 @@
     -fx-opacity: 0;
 }
 
-.tab-pane
-{
-    -fx-tab-min-width:90px;
+.tab-pane {
+    -fx-tab-min-width: 90px;
 }
 
-.tab{
+.tab {
     -fx-background-insets: 0 1 0 1,0,0;
 }
 
-.tab-pane .tab
-{
-    -fx-background-color: #e6e6e6;
-
+.tab-pane .tab {
+    -fx-background-color: red;
 }
 
-.tab-pane .tab:selected
-{
+.tab-pane .tab:selected {
     -fx-background-color: #9e9fa1;
 }
 

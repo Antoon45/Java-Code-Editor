@@ -4,7 +4,6 @@ import javafx.stage.FileChooser;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 
 public class FileUtility {
 

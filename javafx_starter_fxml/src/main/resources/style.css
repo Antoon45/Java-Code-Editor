@@ -33,7 +33,8 @@
 }
 
 .menu-item:focused {
-     -fx-background-color: grey;
+     -fx-background-color: lightgrey;
+     -fx-text-fill: black;
 }
 
 .menu-item:focused .label {
@@ -41,7 +42,7 @@
 }
 
 .menu:showing, .menu-item:hover, .menu:hover {
--fx-background-color: grey;
+    -fx-background-color: grey;
 }
 
 .text-area {

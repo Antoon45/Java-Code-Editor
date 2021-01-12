@@ -17,7 +17,7 @@ public class StarterApp extends Application {
         int windowWidth = 1080;
         int windowHeight = 800;
         Scene scene = new Scene(fxmlLoader.load(), windowWidth, windowHeight);
-        // Only seems to use style.css for some reason?
+
         scene.getStylesheets().add("style.css");
         scene.getStylesheets().add("tab.css");
         scene.getStylesheets().add("keywords.css");

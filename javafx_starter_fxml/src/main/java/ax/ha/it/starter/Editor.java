@@ -1,8 +1,12 @@
 package ax.ha.it.starter;
 
 import ax.ha.it.starter.constants.Keywords;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.model.StyleSpans;
@@ -17,20 +21,81 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 
 public class Editor {
-    private final CodeArea codeTextArea;
     private final ExecutorService taskExecutor;
+    private final EventHandler<KeyEvent> keyTyped;
+    private final EventHandler<KeyEvent> keyPress;
+    private CodeArea codeTextArea;
     private TextArea resultTextArea; // Place holder for terminal
+
+    {
+        keyTyped = (KeyEvent event) -> {
+            if (event.isConsumed()) {
+                int position = codeTextArea.getCaretPosition();
+                String character = event.getCharacter();
+                Platform.runLater(() -> {
+                    codeTextArea.replaceText(position - 1, position, character);
+                });
+                System.out.print(codeTextArea.getText());
+            }
+        };
+    }
+
+    {
+        keyPress = (KeyEvent event) -> {
+            if (event.isConsumed()) {
+                KeyCode key = event.getCode();
+                int position = codeTextArea.getCaretPosition();
+                if (key == KeyCode.ENTER) {
+                    Platform.runLater(() -> {
+                        codeTextArea.replaceText(position - 1, position, Keywords.ENTER);
+                    });
+                } else if (key == KeyCode.BACK_SPACE) {
+                    Platform.runLater(() -> {
+                        codeTextArea.replaceText(position - 1, position, Keywords.BACK_SPACE);
+                    });
+                }
+                System.out.print(codeTextArea.getText());
+            }
+        };
+    }
 
     Editor(CodeArea codeArea, TextArea resultArea) {
         taskExecutor = Executors.newSingleThreadExecutor();
         codeTextArea = codeArea;
         resultTextArea = resultArea;
+        codeTextArea.setOnKeyTyped(keyTyped);
+        codeTextArea.setOnKeyPressed(keyPress);
     }
 
     /*
      * This code is taken from the demo
      * https://github.com/FXMisc/RichTextFX/blob/master/richtextfx-demos/src/main/java/org/fxmisc/richtext/demo/JavaKeywordsAsyncDemo.java
      * */
+
+    private static StyleSpans<Collection<String>> computeHighlighting(String text) {
+        Matcher matcher = Keywords.PATTERN.matcher(text);
+        int lastKwEnd = 0;
+        StyleSpansBuilder<Collection<String>> spansBuilder
+                = new StyleSpansBuilder<>();
+        while (matcher.find()) {
+            String styleClass =
+                    matcher.group("KEYWORD") != null ? "keyword" :
+                            matcher.group("PAREN") != null ? "paren" :
+                                    matcher.group("BRACE") != null ? "brace" :
+                                            matcher.group("BRACKET") != null ? "bracket" :
+                                                    matcher.group("SEMICOLON") != null ? "semicolon" :
+                                                            matcher.group("STRING") != null ? "string" :
+                                                                    matcher.group("COMMENT") != null ? "comment" :
+                                                                            null; /* never happens */
+            assert styleClass != null;
+            spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
+            spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
+            lastKwEnd = matcher.end();
+        }
+        spansBuilder.add(Collections.emptyList(), text.length() - lastKwEnd);
+        return spansBuilder.create();
+    }
+
     public void codeAreaHighlighter() {
         codeTextArea.multiPlainChanges()
                 .successionEnds(Duration.ofMillis(500))
@@ -48,7 +113,6 @@ public class Editor {
         codeTextArea.setParagraphGraphicFactory(LineNumberFactory.get(codeTextArea));
     }
 
-
     private Task<StyleSpans<Collection<String>>> computeHighlightingAsync() {
         String text = codeTextArea.getText();
         Task<StyleSpans<Collection<String>>> task = new Task<StyleSpans<Collection<String>>>() {
@@ -63,28 +127,5 @@ public class Editor {
 
     private void applyHighlighting(StyleSpans<Collection<String>> highlighting) {
         codeTextArea.setStyleSpans(0, highlighting);
-    }
-
-    private static StyleSpans<Collection<String>> computeHighlighting(String text) {
-        Matcher matcher = Keywords.PATTERN.matcher(text);
-        int lastKwEnd = 0;
-        StyleSpansBuilder<Collection<String>> spansBuilder
-                = new StyleSpansBuilder<>();
-        while(matcher.find()) {
-            String styleClass =
-                    matcher.group("KEYWORD") != null ? "keyword" :
-                            matcher.group("PAREN") != null ? "paren" :
-                                    matcher.group("BRACE") != null ? "brace" :
-                                            matcher.group("BRACKET") != null ? "bracket" :
-                                                    matcher.group("SEMICOLON") != null ? "semicolon" :
-                                                            matcher.group("STRING") != null ? "string" :
-                                                                    matcher.group("COMMENT") != null ? "comment" :
-                                                                            null; /* never happens */ assert styleClass != null;
-            spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
-            spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
-            lastKwEnd = matcher.end();
-        }
-        spansBuilder.add(Collections.emptyList(), text.length() - lastKwEnd);
-        return spansBuilder.create();
     }
 }
