@@ -38,9 +38,7 @@ public class Editor {
                 System.out.print(codeTextArea.getText());
             }
         };
-    }
 
-    {
         keyPress = (KeyEvent event) -> {
             if (event.isConsumed()) {
                 KeyCode key = event.getCode();
@@ -51,7 +49,7 @@ public class Editor {
                     });
                 } else if (key == KeyCode.BACK_SPACE) {
                     Platform.runLater(() -> {
-                        codeTextArea.replaceText(position - 1, position, Keywords.BACK_SPACE);
+                        codeTextArea.replaceText(position, position, Keywords.BACK_SPACE);
                     });
                 }
                 System.out.print(codeTextArea.getText());

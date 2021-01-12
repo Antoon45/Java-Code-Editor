@@ -19,7 +19,7 @@ public class Keywords {
             "switch", "synchronized", "this", "throw", "throws",
             "transient", "try", "void", "volatile", "while"
     };
-    public static final String BACK_SPACE = KeyCode.BACK_SPACE.getChar();
+    public static final String BACK_SPACE = "";
     public static final String ENTER = KeyCode.ENTER.getChar();
     public static final String KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
     public static final String PAREN_PATTERN = "\\(|\\)";
