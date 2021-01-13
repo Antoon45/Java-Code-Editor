@@ -1,6 +1,6 @@
 package ax.ha.it.starter;
 
-import ax.ha.it.starter.utils.FileUtility;
+import ax.ha.it.starter.utilities.FileUtility;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -20,6 +20,7 @@ public class AppController {
 
     private static final int THREADS_AVAILABLE = Runtime.getRuntime().availableProcessors();
 
+
     //FX Views
     @FXML
     private TextArea resultTextArea;
@@ -33,7 +34,14 @@ public class AppController {
     private MenuItem exitMenuItem;
     @FXML
     private MenuItem saveMenuItem;
+    @FXML
+    private MenuItem newFileMenuItem;
+    @FXML
+    private MenuItem newFolderMenuItem;
 
+
+    @FXML
+    private ListView openedFilesList;
 
     private ExecutorService executorService;
 
@@ -52,6 +60,7 @@ public class AppController {
         exitMenuItem.setOnAction(event -> kill());
         openFileMenuItem.setOnAction(event -> openFileAction());
         saveMenuItem.setOnAction(event -> saveFileAction());
+        newFileMenuItem.setOnAction(event -> createNewFile());
     }
 
     /**
@@ -107,6 +116,20 @@ public class AppController {
         } catch (IOException e) {
             System.out.println("Can't open file");
         }
+    }
+
+    private void createNewFile() {
+        Tab newTab = new Tab();
+        //newTab.setUserData();
+
+        CodeArea codeTextArea = new CodeArea();
+        Editor editorController = new Editor(codeTextArea, resultTextArea);
+        editorController.codeAreaHighlighter();
+        ScrollPane scrollArea = new ScrollPane(codeTextArea);
+        newTab.setContent(scrollArea);
+        scrollArea.fitToWidthProperty().set(true);
+        scrollArea.fitToHeightProperty().set(true);
+        Platform.runLater(() -> codeAreaLayout.getTabs().add(newTab));
     }
 
     private void saveSourceCode(File sourceFile) throws IOException {

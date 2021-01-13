@@ -1,4 +1,4 @@
-package ax.ha.it.starter.utils;
+package ax.ha.it.starter.utilities;
 
 import javafx.stage.FileChooser;
 import org.jetbrains.annotations.Nullable;

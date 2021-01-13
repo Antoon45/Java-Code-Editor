@@ -13,11 +13,13 @@
                         <Menu mnemonicParsing="false" text="New">
                             <items>
                                 <MenuItem fx:id="newFileMenuItem" mnemonicParsing="false" text="New File" />
+                                <MenuItem fx:id="newFolderMenuItem" mnemonicParsing="false" text="New Folder" />
                             </items>
                         </Menu>
                         <MenuItem fx:id="openFileMenuItem" mnemonicParsing="false" text="Open File" />
-                        <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Exit" />
                         <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" text="Save" />
+
+                        <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Exit" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

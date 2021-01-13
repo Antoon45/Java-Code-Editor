@@ -32,9 +32,7 @@ public class Editor {
             if (event.isConsumed()) {
                 int position = codeTextArea.getCaretPosition();
                 String character = event.getCharacter();
-                Platform.runLater(() -> {
-                    codeTextArea.replaceText(position - 1, position, character);
-                });
+                Platform.runLater(() -> codeTextArea.replaceText(position - 1, position, character));
                 System.out.print(codeTextArea.getText());
             }
         };
@@ -44,13 +42,9 @@ public class Editor {
                 KeyCode key = event.getCode();
                 int position = codeTextArea.getCaretPosition();
                 if (key == KeyCode.ENTER) {
-                    Platform.runLater(() -> {
-                        codeTextArea.replaceText(position - 1, position, Keywords.ENTER);
-                    });
+                    Platform.runLater(() -> codeTextArea.replaceText(position - 1, position, Keywords.ENTER));
                 } else if (key == KeyCode.BACK_SPACE) {
-                    Platform.runLater(() -> {
-                        codeTextArea.replaceText(position, position, Keywords.BACK_SPACE);
-                    });
+                    Platform.runLater(() -> codeTextArea.replaceText(position, position, Keywords.BACK_SPACE));
                 }
                 System.out.print(codeTextArea.getText());
             }
@@ -113,7 +107,7 @@ public class Editor {
 
     private Task<StyleSpans<Collection<String>>> computeHighlightingAsync() {
         String text = codeTextArea.getText();
-        Task<StyleSpans<Collection<String>>> task = new Task<StyleSpans<Collection<String>>>() {
+        Task<StyleSpans<Collection<String>>> task = new Task<>() {
             @Override
             protected StyleSpans<Collection<String>> call() {
                 return computeHighlighting(text);
