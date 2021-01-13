@@ -1,6 +1,6 @@
 package ax.ha.it.starter;
 
-import ax.ha.it.starter.utilities.FileUtility;
+import ax.ha.it.starter.utils.FileUtility;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,17 +9,18 @@ import org.fxmisc.richtext.CodeArea;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class AppController {
 
     private static final int THREADS_AVAILABLE = Runtime.getRuntime().availableProcessors();
-
 
     //FX Views
     @FXML
@@ -35,13 +36,7 @@ public class AppController {
     @FXML
     private MenuItem saveMenuItem;
     @FXML
-    private MenuItem newFileMenuItem;
-    @FXML
-    private MenuItem newFolderMenuItem;
-
-
-    @FXML
-    private ListView openedFilesList;
+    private MenuItem aboutMenuItem;
 
     private ExecutorService executorService;
 
@@ -60,7 +55,7 @@ public class AppController {
         exitMenuItem.setOnAction(event -> kill());
         openFileMenuItem.setOnAction(event -> openFileAction());
         saveMenuItem.setOnAction(event -> saveFileAction());
-        newFileMenuItem.setOnAction(event -> createNewFile());
+        aboutMenuItem.setOnAction(actionEvent -> openAbout());
     }
 
     /**
@@ -73,6 +68,23 @@ public class AppController {
         if (javaFile != null) {
             executorService.execute(() -> openNewTabWithFile(javaFile));
         }
+    }
+
+    private void openAbout() {
+        Alert a = new Alert(Alert.AlertType.NONE);
+        a.setContentText("Created by Anton Wärnström and Andreas Tallberg");
+        a.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        a.show();
+    }
+
+    private void chooseFileName(){
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setContentText("Enter file name");
+        dialog.setHeaderText(null);
+        dialog.setTitle(null);
+        dialog.setGraphic(null);
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(name -> System.out.println("File name: " + name));
     }
 
     private void saveFileAction() {
@@ -98,6 +110,7 @@ public class AppController {
         newTab.setUserData(sourceFile.getPath());
 
         CodeArea codeTextArea = new CodeArea();
+        codeTextArea.setStyle("-fx-fill: white;");
         Editor editorController = new Editor(codeTextArea, resultTextArea);
 
         try {
@@ -118,37 +131,15 @@ public class AppController {
         }
     }
 
-    private void createNewFile() {
-        Tab newTab = new Tab();
-        //newTab.setUserData();
-
-        CodeArea codeTextArea = new CodeArea();
-        Editor editorController = new Editor(codeTextArea, resultTextArea);
-        editorController.codeAreaHighlighter();
-        ScrollPane scrollArea = new ScrollPane(codeTextArea);
-        newTab.setContent(scrollArea);
-        scrollArea.fitToWidthProperty().set(true);
-        scrollArea.fitToHeightProperty().set(true);
-        Platform.runLater(() -> codeAreaLayout.getTabs().add(newTab));
-    }
-
     private void saveSourceCode(File sourceFile) throws IOException {
         String saveLocation = sourceFile.getPath();
         StringBuilder code = new StringBuilder();
-
         List<String> codeLines = Files.readAllLines(Path.of(sourceFile.getPath()), Charset.defaultCharset());
-        for (String s : codeLines) {
-            code.append(s).append("\n");
-        }
+        code.append("Hello World");
+        codeLines.forEach(System.out::println);
 
-        try {
-            FileWriter file = new FileWriter(saveLocation);
-            file.write(String.valueOf(code));
-            file.close();
-            File testFile = new File(String.valueOf(file));
-            System.out.println(testFile.getPath());
-        } catch (IOException e) {
-            e.printStackTrace();
+        try (PrintWriter out = new PrintWriter(sourceFile)) {
+            out.println(code);
         }
     }
 }

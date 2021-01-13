@@ -11,11 +11,11 @@
 }
 
 .tab-pane .tab {
-    -fx-background-color: red;
+    -fx-background-color: #3c3f41;
 }
 
 .tab-pane .tab:selected {
-    -fx-background-color: #9e9fa1;
+    -fx-background-color: #585858;
 }
 
 .tab .tab-label {
