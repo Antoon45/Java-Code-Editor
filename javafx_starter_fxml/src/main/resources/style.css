@@ -20,29 +20,33 @@
     -fx-background-color: grey;
 }
 
-
-/*Tabs*/
-
-
-
-
-
 /*MenuBar*/
-.menu-item .label {
+
+.menu .label, .menu-item .label
+{
+    -fx-text-fill: white;
+}
+
+.menu-item {
     -fx-text-fill: black;
 }
 
+.menu:hover {
+-fx-background-color: #3c3f41;
+}
+
+
+.context-menu {
+    -fx-background-color: #3c3f41;
+}
+
 .menu-item:focused {
-     -fx-background-color: lightgrey;
-     -fx-text-fill: black;
+     -fx-background-color: #202225;
+     -fx-text-fill: white;
 }
 
 .menu-item:focused .label {
     -fx-text-fill: white;
-}
-
-.menu:showing, .menu-item:hover, .menu:hover {
-    -fx-background-color: grey;
 }
 
 .text-area {
@@ -51,8 +55,30 @@
     -fx-display-caret:true;
 }
 
-.text-area .content {
-    -fx-background-color: #3c3f41;
+.text-area .content, #tree, #window, .menu:showing, #treeborder, #codeWindowBorder {
+    -fx-background-color: #202225;
 }
+
+
+.split-pane-divider {
+-fx-background-color: #3c3f41;
+}
+
+#test {
+-fx-background-color: red;
+}
+
+#codeBox .children {
+-fx-background-color: red;
+}
+
+.styled-text-area {
+    -fx-font-size: 16px;
+    -fx-background-color: #202225;
+}
+
+
+
+
 
 
