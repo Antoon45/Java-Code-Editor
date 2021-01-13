@@ -13,4 +13,11 @@ public class FileUtility {
         fileChooser.setTitle(title);
         return fileChooser.showOpenDialog(null);
     }
+
+    @Nullable
+    public static File openSaveFileExplorer(String title) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(title);
+        return fileChooser.showSaveDialog(null);
+    }
 }

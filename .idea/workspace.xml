@@ -24,6 +24,11 @@
   <component name="ChangeListManager">
     <list default="true" id="36e3d60f-0bdc-4ac5-a756-f00fc9c0a88c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx_starter_fxml/src/main/java/ax/ha/it/starter/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/javafx_starter_fxml/src/main/java/ax/ha/it/starter/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx_starter_fxml/src/main/java/ax/ha/it/starter/utils/FileUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/javafx_starter_fxml/src/main/java/ax/ha/it/starter/utils/FileUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx_starter_fxml/src/main/resources/ax/ha/it/starter/layout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/javafx_starter_fxml/src/main/resources/ax/ha/it/starter/layout.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx_starter_fxml/target/classes/ax/ha/it/starter/AppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/javafx_starter_fxml/target/classes/ax/ha/it/starter/AppController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx_starter_fxml/target/classes/ax/ha/it/starter/layout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/javafx_starter_fxml/target/classes/ax/ha/it/starter/layout.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +52,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/javafx_starter_fxml/richtextfx-0.10.5.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -68,14 +73,10 @@
       </method>
     </configuration>
     <configuration name="StarterApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="ax.ha.it.starter.StarterApp" />
-      <module name="javafx_starter_fxml" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ax.ha.it.starter.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <module name="oo2_project_4" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

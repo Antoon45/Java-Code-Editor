@@ -17,6 +17,7 @@
                         </Menu>
                         <MenuItem fx:id="openFileMenuItem" mnemonicParsing="false" text="Open File" />
                         <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Exit" />
+                        <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" text="Save" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -19,10 +20,6 @@ public class AppController {
 
     private static final int THREADS_AVAILABLE = Runtime.getRuntime().availableProcessors();
 
-    //Controllers
-    @FXML
-    static AppController mainController;
-
     //FX Views
     @FXML
     private TextArea resultTextArea;
@@ -34,11 +31,14 @@ public class AppController {
     private MenuItem openFileMenuItem;
     @FXML
     private MenuItem exitMenuItem;
+    @FXML
+    private MenuItem saveMenuItem;
+
 
     private ExecutorService executorService;
 
     @FXML
-    private void kill(){
+    private void kill() {
         System.exit(0);
     }
 
@@ -51,6 +51,7 @@ public class AppController {
     private void onMenuItemsActions() {
         exitMenuItem.setOnAction(event -> kill());
         openFileMenuItem.setOnAction(event -> openFileAction());
+        saveMenuItem.setOnAction(event -> saveFileAction());
     }
 
     /**
@@ -62,6 +63,19 @@ public class AppController {
         File javaFile = FileUtility.openFileInExplorer("Find and select Java file");
         if (javaFile != null) {
             executorService.execute(() -> openNewTabWithFile(javaFile));
+        }
+    }
+
+    private void saveFileAction() {
+        File javaFile = FileUtility.openSaveFileExplorer("Select and save Java file");
+        if (javaFile != null) {
+            executorService.execute(() -> {
+                try {
+                    saveSourceCode(javaFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
@@ -92,6 +106,26 @@ public class AppController {
             Platform.runLater(() -> codeAreaLayout.getTabs().add(newTab));
         } catch (IOException e) {
             System.out.println("Can't open file");
+        }
+    }
+
+    private void saveSourceCode(File sourceFile) throws IOException {
+        String saveLocation = sourceFile.getPath();
+        StringBuilder code = new StringBuilder();
+
+        List<String> codeLines = Files.readAllLines(Path.of(sourceFile.getPath()), Charset.defaultCharset());
+        for (String s : codeLines) {
+            code.append(s).append("\n");
+        }
+
+        try {
+            FileWriter file = new FileWriter(saveLocation);
+            file.write(String.valueOf(code));
+            file.close();
+            File testFile = new File(String.valueOf(file));
+            System.out.println(testFile.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
