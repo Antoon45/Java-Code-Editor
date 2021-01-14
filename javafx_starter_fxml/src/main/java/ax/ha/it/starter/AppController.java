@@ -1,5 +1,6 @@
 package ax.ha.it.starter;
 
+import ax.ha.it.starter.utilities.DialogUtility;
 import ax.ha.it.starter.utilities.FileUtility;
 import ax.ha.it.starter.utilities.TreeViewUtility;
 import javafx.application.Platform;
@@ -14,7 +15,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -67,8 +67,8 @@ public class AppController {
         exitMenuItem.setOnAction(event -> kill());
         openFileMenuItem.setOnAction(event -> openFileAction());
         saveMenuItem.setOnAction(event -> saveFileAction());
-        aboutMenuItem.setOnAction(actionEvent -> openAbout());
-        newFileMenuItem.setOnAction(event -> createNewFile(chooseFileName()));
+        aboutMenuItem.setOnAction(actionEvent -> DialogUtility.openAlertDialog("Created by Anton Wärnström and Andreas Tallberg"));
+        newFileMenuItem.setOnAction(event -> createNewFile(DialogUtility.inputDialog("Enter filename")));
 
     }
 
@@ -82,23 +82,6 @@ public class AppController {
         if (javaFile != null) {
             executorService.execute(() -> openNewTabWithFile(javaFile));
         }
-    }
-
-    private void openAbout() {
-        Alert a = new Alert(Alert.AlertType.NONE);
-        a.setContentText("Created by Anton Wärnström and Andreas Tallberg");
-        a.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        a.show();
-    }
-
-    private String chooseFileName(){
-        TextInputDialog dialog = new TextInputDialog("");
-        dialog.setContentText("Enter file name");
-        dialog.setHeaderText(null);
-        dialog.setTitle(null);
-        dialog.setGraphic(null);
-        Optional<String> result =  dialog.showAndWait();
-        return result.orElse(null);
     }
 
     private void saveFileAction() {
@@ -164,10 +147,7 @@ public class AppController {
                 codeAreaLayout.getTabs().add(newTab);
             });
         } else {
-            Alert a = new Alert(Alert.AlertType.NONE);
-            a.setContentText("Can't create a file without filename");
-            a.getDialogPane().getButtonTypes().add(ButtonType.OK);
-            a.show();
+            DialogUtility.openAlertDialog("Please enter a filename");
         }
     }
 
