@@ -1,7 +1,9 @@
 .styled-text-area .text {
     -fx-fill: white;
 }
-
+.paragraph-text .text{
+    -fx-fill: white;
+}
 .keyword {
     -fx-fill:#EE82EE !important;
     -fx-font-weight: bold;

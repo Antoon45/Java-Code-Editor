@@ -21,6 +21,7 @@ public class StarterApp extends Application {
         scene.getStylesheets().add("style.css");
         scene.getStylesheets().add("tab.css");
         scene.getStylesheets().add("keywords.css");
+        scene.getStylesheets().add("treeview.css");
 
         stage.setScene(scene);
         stage.show();

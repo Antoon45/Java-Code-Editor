@@ -1,13 +1,13 @@
 package ax.ha.it.starter;
 
-import ax.ha.it.starter.utils.FileUtility;
+import ax.ha.it.starter.utilities.FileUtility;
+import ax.ha.it.starter.utilities.TreeViewUtility;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
@@ -37,8 +37,19 @@ public class AppController {
     private MenuItem saveMenuItem;
     @FXML
     private MenuItem aboutMenuItem;
+    @FXML
+    private MenuItem newFileMenuItem;
+    @FXML
+    private MenuItem newFolderMenuItem;
 
     private ExecutorService executorService;
+    @FXML
+    private TreeView<String> fileTreeView;
+    @FXML
+    private TreeItem<String> treeItem;
+
+    private TreeViewUtility treeViewList;
+
 
     @FXML
     private void kill() {
@@ -47,6 +58,7 @@ public class AppController {
 
     public void initialize() {
         onMenuItemsActions();
+        treeViewList = new TreeViewUtility(fileTreeView, treeItem);
         executorService = Executors.newFixedThreadPool(THREADS_AVAILABLE);
         codeAreaLayout.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
     }
@@ -56,6 +68,8 @@ public class AppController {
         openFileMenuItem.setOnAction(event -> openFileAction());
         saveMenuItem.setOnAction(event -> saveFileAction());
         aboutMenuItem.setOnAction(actionEvent -> openAbout());
+        newFileMenuItem.setOnAction(event -> createNewFile(chooseFileName()));
+
     }
 
     /**
@@ -77,14 +91,14 @@ public class AppController {
         a.show();
     }
 
-    private void chooseFileName(){
+    private String chooseFileName(){
         TextInputDialog dialog = new TextInputDialog("");
         dialog.setContentText("Enter file name");
         dialog.setHeaderText(null);
         dialog.setTitle(null);
         dialog.setGraphic(null);
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(name -> System.out.println("File name: " + name));
+        Optional<String> result =  dialog.showAndWait();
+        return result.orElse(null);
     }
 
     private void saveFileAction() {
@@ -110,7 +124,6 @@ public class AppController {
         newTab.setUserData(sourceFile.getPath());
 
         CodeArea codeTextArea = new CodeArea();
-        codeTextArea.setStyle("-fx-fill: white;");
         Editor editorController = new Editor(codeTextArea, resultTextArea);
 
         try {
@@ -125,9 +138,36 @@ public class AppController {
             newTab.setContent(scrollArea);
             scrollArea.fitToWidthProperty().set(true);
             scrollArea.fitToHeightProperty().set(true);
-            Platform.runLater(() -> codeAreaLayout.getTabs().add(newTab));
+            Platform.runLater(() -> {
+                treeViewList.addTreeItem(sourceFile.getName());
+                codeAreaLayout.getTabs().add(newTab);
+            });
         } catch (IOException e) {
             System.out.println("Can't open file");
+        }
+    }
+
+    private void createNewFile(String fileName) {
+        if (!fileName.isEmpty()) {
+            Tab newTab = new Tab(fileName);
+            CodeArea codeTextArea = new CodeArea();
+            Editor editorController = new Editor(codeTextArea, resultTextArea);
+            ScrollPane scrollArea = new ScrollPane(codeTextArea);
+
+            newTab.setUserData(fileName);
+            editorController.codeAreaHighlighter();
+            newTab.setContent(scrollArea);
+            scrollArea.fitToWidthProperty().set(true);
+            scrollArea.fitToHeightProperty().set(true);
+            Platform.runLater(() -> {
+                treeViewList.addTreeItem(fileName);
+                codeAreaLayout.getTabs().add(newTab);
+            });
+        } else {
+            Alert a = new Alert(Alert.AlertType.NONE);
+            a.setContentText("Can't create a file without filename");
+            a.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            a.show();
         }
     }
 
