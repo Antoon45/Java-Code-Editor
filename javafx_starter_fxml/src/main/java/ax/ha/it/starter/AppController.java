@@ -9,8 +9,8 @@ import javafx.scene.control.*;
 import org.fxmisc.richtext.CodeArea;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -50,6 +50,8 @@ public class AppController {
 
     private TreeViewUtility treeViewList;
 
+    private FileUtility fileManager;
+
 
     @FXML
     private void kill() {
@@ -58,6 +60,7 @@ public class AppController {
 
     public void initialize() {
         onMenuItemsActions();
+        fileManager = new FileUtility();
         treeViewList = new TreeViewUtility(fileTreeView, treeItem);
         executorService = Executors.newFixedThreadPool(THREADS_AVAILABLE);
         codeAreaLayout.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
@@ -67,7 +70,7 @@ public class AppController {
         exitMenuItem.setOnAction(event -> kill());
         openFileMenuItem.setOnAction(event -> openFileAction());
         saveMenuItem.setOnAction(event -> saveFileAction());
-        aboutMenuItem.setOnAction(actionEvent -> DialogUtility.openAlertDialog("Created by Anton Wärnström and Andreas Tallberg"));
+        aboutMenuItem.setOnAction(actionEvent -> DialogUtility.openAlertDialog("")); // TODO: Add names to the string
         newFileMenuItem.setOnAction(event -> createNewFile(DialogUtility.inputDialog("Enter filename")));
 
     }
@@ -78,14 +81,14 @@ public class AppController {
      * TODO: Check for only Java extensions
      */
     private void openFileAction() {
-        File javaFile = FileUtility.openFileInExplorer("Find and select Java file");
+        File javaFile = fileManager.openFileInExplorer("Find and select Java file");
         if (javaFile != null) {
             executorService.execute(() -> openNewTabWithFile(javaFile));
         }
     }
 
     private void saveFileAction() {
-        File javaFile = FileUtility.openSaveFileExplorer("Select and save Java file");
+        File javaFile = fileManager.openSaveFileExplorer("Select and save Java file");
         if (javaFile != null) {
             executorService.execute(() -> {
                 try {
@@ -108,6 +111,7 @@ public class AppController {
 
         CodeArea codeTextArea = new CodeArea();
         Editor editorController = new Editor(codeTextArea, resultTextArea);
+        fileManager.setEditor(editorController);
 
         try {
             editorController.codeAreaHighlighter();
@@ -121,6 +125,7 @@ public class AppController {
             newTab.setContent(scrollArea);
             scrollArea.fitToWidthProperty().set(true);
             scrollArea.fitToHeightProperty().set(true);
+            fileManager.updateFile(sourceFile);
             Platform.runLater(() -> {
                 treeViewList.addTreeItem(sourceFile.getName());
                 codeAreaLayout.getTabs().add(newTab);
@@ -151,15 +156,14 @@ public class AppController {
         }
     }
 
-    private void saveSourceCode(File sourceFile) throws IOException {
-        String saveLocation = sourceFile.getPath();
+    private void saveSourceCode(File chosenFile) throws IOException {
         StringBuilder code = new StringBuilder();
-        List<String> codeLines = Files.readAllLines(Path.of(sourceFile.getPath()), Charset.defaultCharset());
-        code.append("Hello World");
-        codeLines.forEach(System.out::println);
+        List<String> codeLines = Files.readAllLines(Path.of(chosenFile.getPath()), Charset.defaultCharset());
 
-        try (PrintWriter out = new PrintWriter(sourceFile)) {
-            out.println(code);
-        }
+        FileWriter fileWriter;
+        fileWriter = new FileWriter(chosenFile);
+        if ()
+        fileWriter.write(fileManager.getEditor().getCode());
+        fileWriter.close();
     }
 }

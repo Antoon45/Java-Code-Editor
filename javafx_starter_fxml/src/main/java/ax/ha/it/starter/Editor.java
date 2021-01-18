@@ -58,6 +58,11 @@ public class Editor {
         codeTextArea.setOnKeyTyped(keyTyped);
         codeTextArea.setOnKeyPressed(keyPress);
     }
+
+    public String getCode() {
+        return codeTextArea.getText();
+    }
+
     /*
      * This code is taken from the demo
      * https://github.com/FXMisc/RichTextFX/blob/master/richtextfx-demos/src/main/java/org/fxmisc/richtext/demo/JavaKeywordsAsyncDemo.java
