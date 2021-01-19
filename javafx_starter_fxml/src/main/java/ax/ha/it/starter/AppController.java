@@ -104,7 +104,6 @@ public class AppController {
      * @param sourceFile
      * @description creates a new tab based on a file
      */
-    //TODO: Update fileList view
     private void openNewTabWithFile(File sourceFile) {
         Tab newTab = new Tab(sourceFile.getName());
         newTab.setUserData(sourceFile.getPath());
@@ -127,11 +126,11 @@ public class AppController {
             scrollArea.fitToHeightProperty().set(true);
             fileManager.updateFile(sourceFile);
             Platform.runLater(() -> {
-                treeViewList.addTreeItem(sourceFile.getName());
+                treeViewList.addTreeItemWithValue(sourceFile.getName(), code.toString());
                 codeAreaLayout.getTabs().add(newTab);
             });
         } catch (IOException e) {
-            System.out.println("Can't open file");
+            DialogUtility.openAlertDialog("Couldn't find a file to open");
         }
     }
 
@@ -157,12 +156,8 @@ public class AppController {
     }
 
     private void saveSourceCode(File chosenFile) throws IOException {
-        StringBuilder code = new StringBuilder();
-        List<String> codeLines = Files.readAllLines(Path.of(chosenFile.getPath()), Charset.defaultCharset());
-
         FileWriter fileWriter;
         fileWriter = new FileWriter(chosenFile);
-        if ()
         fileWriter.write(fileManager.getEditor().getCode());
         fileWriter.close();
     }
