@@ -9,6 +9,11 @@ import java.io.IOException;
 
 public class StarterApp extends Application {
 
+    /**
+     * gets all css and loads FXML in a window sized 1080x800
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
 

@@ -52,12 +52,17 @@ public class AppController {
 
     private FileUtility fileManager;
 
-
+    /**
+     * @description Exit button
+     */
     @FXML
     private void kill() {
         System.exit(0);
     }
 
+    /**
+     * @description all initializers
+     */
     public void initialize() {
         onMenuItemsActions();
         fileManager = new FileUtility();
@@ -66,13 +71,16 @@ public class AppController {
         codeAreaLayout.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
     }
 
+
+    /**
+     * @description all menu item actions
+     */
     private void onMenuItemsActions() {
         exitMenuItem.setOnAction(event -> kill());
         openFileMenuItem.setOnAction(event -> openFileAction());
         saveMenuItem.setOnAction(event -> saveFileAction());
         aboutMenuItem.setOnAction(actionEvent -> DialogUtility.openAlertDialog("")); // TODO: Add names to the string
         newFileMenuItem.setOnAction(event -> createNewFile(DialogUtility.inputDialog("Enter filename")));
-
     }
 
     /**
@@ -80,6 +88,7 @@ public class AppController {
      * <p>
      * TODO: Check for only Java extensions
      */
+    //Open File
     private void openFileAction() {
         File javaFile = fileManager.openFileInExplorer("Find and select Java file");
         if (javaFile != null) {
@@ -87,6 +96,10 @@ public class AppController {
         }
     }
 
+
+    /**
+     * @description Opens fileExplorer and calls openSaveFileExplorer() to save the returned file
+     */
     private void saveFileAction() {
         File javaFile = fileManager.openSaveFileExplorer("Select and save Java file");
         if (javaFile != null) {
@@ -134,6 +147,11 @@ public class AppController {
         }
     }
 
+
+    /**
+     * @description Creates a new file in a new tab with the name typed in the openAlertDialog()
+     * @param fileName
+     */
     private void createNewFile(String fileName) {
         if (!fileName.isEmpty()) {
             Tab newTab = new Tab(fileName);
@@ -155,6 +173,12 @@ public class AppController {
         }
     }
 
+
+    /**
+     * @description Saves the file
+     * @param chosenFile
+     * @throws IOException
+     */
     private void saveSourceCode(File chosenFile) throws IOException {
         FileWriter fileWriter;
         fileWriter = new FileWriter(chosenFile);

@@ -27,12 +27,14 @@ public class Editor {
     private CodeArea codeTextArea;
     private TextArea resultTextArea; // Place holder for terminal
 
+    //Checks if certains keys are pressed and then either:
     {
         keyTyped = (KeyEvent event) -> {
             if (event.isConsumed()) {
                 int position = codeTextArea.getCaretPosition();
                 String character = event.getCharacter();
                 Platform.runLater(() -> codeTextArea.replaceText(position - 1, position, character));
+                //prints them out in console
                 System.out.print(codeTextArea.getText());
             }
         };
@@ -42,8 +44,10 @@ public class Editor {
                 KeyCode key = event.getCode();
                 int position = codeTextArea.getCaretPosition();
                 if (key == KeyCode.ENTER) {
+                    //adds a new row
                     Platform.runLater(() -> codeTextArea.replaceText(position - 1, position, Keywords.ENTER));
                 } else if (key == KeyCode.BACK_SPACE) {
+                    //removes a letter
                     Platform.runLater(() -> codeTextArea.replaceText(position, position, Keywords.BACK_SPACE));
                 }
                 System.out.print(codeTextArea.getText());
@@ -59,6 +63,10 @@ public class Editor {
         codeTextArea.setOnKeyPressed(keyPress);
     }
 
+    /**
+     * A getter that gets the text inside the codeArea
+     * @return the text inside the codeArea "editor"
+     */
     public String getCode() {
         return codeTextArea.getText();
     }
@@ -68,6 +76,12 @@ public class Editor {
      * https://github.com/FXMisc/RichTextFX/blob/master/richtextfx-demos/src/main/java/org/fxmisc/richtext/demo/JavaKeywordsAsyncDemo.java
      * */
 
+
+    /**
+     * starts a Matcher which checks if the key typed is the same as any of the keywords then add the color matching in css and keywords.java, if no matches are found, no styling is applied
+     * @param text
+     * @return a new spansBuilder
+     */
     private static StyleSpans<Collection<String>> computeHighlighting(String text) {
         Matcher matcher = Keywords.PATTERN.matcher(text);
         int lastKwEnd = 0;
@@ -92,6 +106,9 @@ public class Editor {
         return spansBuilder.create();
     }
 
+    /**
+     * adds color to the keyword in 500ms after matching.
+     */
     public void codeAreaHighlighter() {
         codeTextArea.multiPlainChanges()
                 .successionEnds(Duration.ofMillis(500))
@@ -109,6 +126,10 @@ public class Editor {
         codeTextArea.setParagraphGraphicFactory(LineNumberFactory.get(codeTextArea));
     }
 
+    /**
+     *  computes highlighting if called for in codeAreaHighlighter()
+     * @return Colors the word in the right color.
+     */
     private Task<StyleSpans<Collection<String>>> computeHighlightingAsync() {
         String text = codeTextArea.getText();
         Task<StyleSpans<Collection<String>>> task = new Task<>() {
@@ -121,6 +142,10 @@ public class Editor {
         return task;
     }
 
+    /**
+     * Applies the highlighting if called for in codeAreaHighLighter
+     * @param highlighting
+     */
     private void applyHighlighting(StyleSpans<Collection<String>> highlighting) {
         codeTextArea.setStyleSpans(0, highlighting);
     }
