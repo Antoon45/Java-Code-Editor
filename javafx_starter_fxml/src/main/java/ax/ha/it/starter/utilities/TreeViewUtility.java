@@ -16,7 +16,7 @@ public class TreeViewUtility {
         fileTreeView.setEditable(false);
     }
 
-    EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> { // TODO: Implement code for mouseEventHandler
+    EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
         System.out.println(treeItem.getValue());
     };
 
