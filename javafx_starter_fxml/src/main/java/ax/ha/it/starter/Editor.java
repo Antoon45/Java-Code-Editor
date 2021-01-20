@@ -92,7 +92,7 @@ public class Editor {
 
     private void codeExecute(File file) {
         String compile = "javac ".concat(file.getAbsolutePath());
-        String run = "java ".concat(file.getAbsolutePath()).split("\\.")[0].concat(".java");
+        String run = "java ".concat(file.getAbsolutePath());
         try {
             runProcess(compile);
             runProcess(run);

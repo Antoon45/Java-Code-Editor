@@ -22,12 +22,11 @@ import java.util.concurrent.Executors;
 public class AppController {
 
     private static final int THREADS_AVAILABLE = Runtime.getRuntime().availableProcessors();
-
     //FX Views
     @FXML
     private TextArea resultTextArea;
     @FXML
-    private TabPane codeAreaLayout;
+    public TabPane codeAreaLayout;
 
     //File Menu Items
     @FXML
@@ -107,7 +106,7 @@ public class AppController {
      * @param sourceFile, fileManager
      * @description creates a new tab based on a file
      */
-    private void openNewTabWithFile(File sourceFile) {
+    public void openNewTabWithFile(File sourceFile) {
         Tab newTab = new Tab(sourceFile.getName());
         newTab.setUserData(sourceFile.getPath());
 

@@ -18,7 +18,7 @@ public class TreeViewUtility {
     }
 
     EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
-        System.out.println(treeItem.getValue());
+        System.out.println(treeItem.getChildren().get(0).getValue().getFile());
     };
 
     /**
@@ -34,6 +34,7 @@ public class TreeViewUtility {
      */
     public void addTreeItem(SourceUtility itemName) {
         treeItem.getChildren().add(new TreeItem<>(itemName));
+        treeItem.setValue(itemName);
         System.out.println(treeItem.getChildren().get(treeItem.getChildren().size()));
     }
 
