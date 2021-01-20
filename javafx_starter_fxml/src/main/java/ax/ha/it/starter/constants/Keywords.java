@@ -6,6 +6,11 @@ import java.util.regex.Pattern;
  * Class taken from demo version
  * https://github.com/FXMisc/RichTextFX/blob/master/richtextfx-demos/src/main/java/org/fxmisc/richtext/demo/JavaKeywordsAsyncDemo.java
  * */
+
+
+/**
+ * All keywords and their respective key that have their own color in keywords.css
+ */
 public class Keywords {
     public static final String[] KEYWORDS = new String[]{
             "abstract", "assert", "boolean", "break", "byte",
