@@ -9,8 +9,6 @@ public class TreeViewUtility {
     private TreeItem<SourceUtility> treeItem;
 
     public TreeViewUtility(TreeView<SourceUtility> fileTreeView, TreeItem<SourceUtility> treeItem) {
-
-    public TreeViewUtility(TreeView<String> fileTreeView, TreeItem<String> treeItem) {
         this.fileTreeView = fileTreeView;
         this.treeItem = treeItem;
         fileTreeView.addEventHandler(MouseEvent.MOUSE_RELEASED, mouseEventHandle);
@@ -29,26 +27,19 @@ public class TreeViewUtility {
         fileTreeView.setRoot(treeItem);
         fileTreeView.setShowRoot(false);
     }
-
-    public void addTreeItem(SourceUtility item) {
-        treeItem.getChildren().add(new TreeItem<>(item));
     /**
      * adds a child to the tree
      * @param itemName
      */
-    public void addTreeItem(String itemName) {
-        treeItem.getChildren().add(new TreeItem<>(itemName));
+    public void addTreeItem(SourceUtility itemName) {
+        treeItem.getChildren().add(new TreeItem<SourceUtility>(itemName));
     }
 
-    public void addTreeItemWithValue(SourceUtility item) {
-        treeItem.getChildren().add(new TreeItem<>(item));
     /**
      * Adds a a child with the text from the codeArea to the tree
      * @param itemName
-     * @param value
      */
-    public void addTreeItemWithValue(String itemName, String value) {
+    public void addTreeItemWithValue(SourceUtility itemName) {
         treeItem.getChildren().add(new TreeItem<>(itemName));
-        treeItem.setValue(value);
     }
 }
