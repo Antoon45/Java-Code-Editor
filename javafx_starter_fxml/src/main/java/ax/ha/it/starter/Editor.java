@@ -26,7 +26,6 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 
 public class Editor {
-    private static final String OS = System.getProperty("os.name").toLowerCase();
     private final ExecutorService taskExecutor;
     private final EventHandler<KeyEvent> keyTyped;
     private final EventHandler<KeyEvent> keyPress;
@@ -55,17 +54,6 @@ public class Editor {
                 System.out.print(codeTextArea.getText());
             }
         };
-    }
-
-    public static void openWindowsTerminal() {
-        if (OS.contains("win")) {
-            try {
-                Runtime runtime = Runtime.getRuntime();
-                runtime.exec("cmd.exe /c start", null);
-            } catch (IOException e) {
-                System.out.println("Can't start windows terminal");
-            }
-        }
     }
 
     protected Editor(CodeArea codeArea, TextArea resultArea) {
@@ -103,11 +91,8 @@ public class Editor {
     }
 
     private void codeExecute(File file) {
-        String compile = "javac -cp src ".concat(file.getAbsolutePath());
-        String run = "java -cp src ".concat(file.getAbsolutePath()).split("\\.")[0];
-        System.out.println("java ".concat(file.getAbsolutePath()).split("\\.")[0].concat(".class"));
-        System.out.println("java ".concat(file.getAbsolutePath()).split("\\.")[0].concat(".class"));
-
+        String compile = "javac ".concat(file.getAbsolutePath());
+        String run = "java ".concat(file.getAbsolutePath()).split("\\.")[0].concat(".java");
         try {
             runProcess(compile);
             runProcess(run);
@@ -117,7 +102,7 @@ public class Editor {
     }
 
     private static void printLines(String cmd, InputStream inputStream) throws Exception {
-        String line = null;
+        String line;
         BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
         while ((line = in.readLine()) != null) {
             resultTextArea.replaceText(0, 0, cmd + " " + line + "\n");

@@ -7,7 +7,7 @@ public class SourceUtility {
     private File sourceFile;
 
     public SourceUtility(File source) {
-        sourceFile = source;
+        this.sourceFile = source;
     }
 
     public String getName() {

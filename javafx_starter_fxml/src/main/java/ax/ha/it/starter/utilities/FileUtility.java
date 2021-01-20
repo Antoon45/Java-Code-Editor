@@ -29,7 +29,7 @@ public class FileUtility {
         try {
             File newFolder = new File(fileChooser.showSaveDialog(null).getAbsolutePath());
             newFolder.createNewFile();
-            return newFolder;
+            return (newFolder);
         } catch (IOException e) {
             String errorMessage = "Can't Create new file in this path";
             System.out.print(errorMessage);

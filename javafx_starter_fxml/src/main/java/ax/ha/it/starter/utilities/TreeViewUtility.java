@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
+
 public class TreeViewUtility {
     private final TreeView<SourceUtility> fileTreeView;
     private TreeItem<SourceUtility> treeItem;
@@ -32,7 +33,8 @@ public class TreeViewUtility {
      * @param itemName
      */
     public void addTreeItem(SourceUtility itemName) {
-        treeItem.getChildren().add(new TreeItem<SourceUtility>(itemName));
+        treeItem.getChildren().add(new TreeItem<>(itemName));
+        System.out.println(treeItem.getChildren().get(treeItem.getChildren().size()));
     }
 
     /**
@@ -41,5 +43,6 @@ public class TreeViewUtility {
      */
     public void addTreeItemWithValue(SourceUtility itemName) {
         treeItem.getChildren().add(new TreeItem<>(itemName));
+        System.out.println(treeItem.getChildren().size());
     }
 }
