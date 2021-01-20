@@ -17,7 +17,7 @@ public class Keywords {
             "new", "package", "private", "protected", "public",
             "return", "short", "static", "strictfp", "super",
             "switch", "synchronized", "this", "throw", "throws",
-            "transient", "try", "void", "volatile", "while"
+            "transient", "try", "void", "volatile", "while", "var"
     };
     public static final String BACK_SPACE = "";
     public static final String ENTER = KeyCode.ENTER.getChar();
