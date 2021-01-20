@@ -10,14 +10,26 @@ public class SourceUtility {
         this.sourceFile = source;
     }
 
+    /**
+     *
+     * @return the name of the File in use
+     */
     public String getName() {
         return sourceFile.getName();
     }
 
+    /**
+     *
+     * @return the file tree of the file
+     */
     public String getPath() {
         return sourceFile.getPath();
     }
 
+    /**
+     *
+     * @return the file
+     */
     public File getFile() {
         return sourceFile;
     }

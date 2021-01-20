@@ -8,7 +8,11 @@ import java.io.IOException;
 
 public class FileUtility {
 
-
+    /**
+     * Creates a new File (currently not in use)
+     * @param filePath
+     * @return
+     */
     @Nullable
     public static File createNewFile(String filePath) {
         try {
@@ -22,6 +26,10 @@ public class FileUtility {
         }
     }
 
+    /**
+     * Creates a new File
+     * @return
+     */
     @Nullable
     public static File createNewFileWithoutPath() {
         FileChooser fileChooser = new FileChooser();
@@ -37,7 +45,10 @@ public class FileUtility {
         }
     }
 
-
+    /**
+     * Creates a new folder (Currently not in use)
+     * @param filePath
+     */
     @Nullable
     public static File createNewFolder(String filePath) {
         File newFolder = new File(filePath);
@@ -45,6 +56,10 @@ public class FileUtility {
         return newFolder;
     }
 
+    /**
+     * Opens the requested File
+     * @param title
+     */
     @Nullable
     public static File openSourceFile(String title) {
         FileChooser fileChooser = new FileChooser();
@@ -52,6 +67,11 @@ public class FileUtility {
         return fileChooser.showOpenDialog(null);
     }
 
+    /**
+     * Save the file (Currently not in use)
+     * @param title
+     * @return a dialog to save
+     */
     @Nullable
     public static File saveSourceFile(String title) {
         FileChooser fileChooser = new FileChooser();
@@ -59,6 +79,11 @@ public class FileUtility {
         return fileChooser.showSaveDialog(null);
     }
 
+    /**
+     * OverWrites the opened file with updated text
+     * @param file
+     * @param content
+     */
     public static void updateContent(File file, String content) {
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -69,6 +94,11 @@ public class FileUtility {
             System.out.println("File save failed.");
         }
     }
+
+    /**
+     * Delete the requested file (Currently not in use)
+     * @param file
+     */
 
     public static void deleteFile(File file) {
         file.deleteOnExit();

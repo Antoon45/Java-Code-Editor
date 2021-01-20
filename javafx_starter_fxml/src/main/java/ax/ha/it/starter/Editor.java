@@ -66,6 +66,9 @@ public class Editor {
         resultArea.setEditable(false);
     }
 
+    /**
+     * Getter for save & run
+     */
     private void getEditorMenu() {
         MenuItem save = new MenuItem("Save");
         MenuItem run = new MenuItem("Run");
@@ -83,6 +86,10 @@ public class Editor {
     }
 
 
+    /**
+     * Saves the code located in sourceFile
+     * @param event
+     */
     private void saveSourceCode(ActionEvent event) {
         String sourceCode = codeTextArea.getText();
         if (sourceFile.canWrite()) {
@@ -90,6 +97,10 @@ public class Editor {
         }
     }
 
+    /**
+     * compiles and runs the code
+     * @param file
+     */
     private void codeExecute(File file) {
         String compile = "javac ".concat(file.getAbsolutePath());
         String run = "java ".concat(file.getAbsolutePath());
@@ -101,6 +112,12 @@ public class Editor {
         }
     }
 
+    /**
+     * prints out the code
+     * @param cmd
+     * @param inputStream
+     * @throws Exception
+     */
     private static void printLines(String cmd, InputStream inputStream) throws Exception {
         String line;
         BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
@@ -109,6 +126,11 @@ public class Editor {
         }
     }
 
+    /**
+     * runs the code
+     * @param command
+     * @throws Exception
+     */
     private static void runProcess(String command) throws Exception {
         Process pro = Runtime.getRuntime().exec(command);
         printLines(command + " stdout:", pro.getInputStream());
@@ -145,6 +167,9 @@ public class Editor {
         return spansBuilder.create();
     }
 
+    /**
+     * Adds highlighting after 500ms and applies it.
+     */
     public void codeAreaHighlighter() {
         codeTextArea.multiPlainChanges()
                 .successionEnds(Duration.ofMillis(500))
@@ -162,6 +187,10 @@ public class Editor {
         codeTextArea.setParagraphGraphicFactory(LineNumberFactory.get(codeTextArea));
     }
 
+    /**
+     * computes hightlighting
+     *
+     */
     private Task<StyleSpans<Collection<String>>> computeHighlightingAsync() {
         String text = codeTextArea.getText();
         Task<StyleSpans<Collection<String>>> task = new Task<>() {
@@ -174,6 +203,10 @@ public class Editor {
         return task;
     }
 
+    /**
+     * Applies highlighting
+     * @param highlighting
+     */
     private void applyHighlighting(StyleSpans<Collection<String>> highlighting) {
         codeTextArea.setStyleSpans(0, highlighting);
     }

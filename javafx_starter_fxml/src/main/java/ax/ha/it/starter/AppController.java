@@ -71,7 +71,7 @@ public class AppController {
         exitMenuItem.setOnAction(event -> kill());
         openFileMenuItem.setOnAction(event -> openFileAction());
         //saveMenuItem.setOnAction(event -> saveFileAction());
-        aboutMenuItem.setOnAction(actionEvent -> DialogUtility.openAlertDialog("")); // TODO: Add names to the string
+        aboutMenuItem.setOnAction(actionEvent -> DialogUtility.openAlertDialog("Created by Anton Wärnström and Andreas Tallberg")); // TODO: Add names to the string
         newFileMenuItem.setOnAction(event -> createNewFile(Objects.requireNonNull(FileUtility.createNewFileWithoutPath())));
 
     }
@@ -135,6 +135,10 @@ public class AppController {
         }
     }
 
+    /**
+     * Creates a new File with a new name
+     * @param sourceFile
+     */
     private void createNewFile(File sourceFile) {
         String fileName = sourceFile.getName();
         if (!fileName.isEmpty()) {
