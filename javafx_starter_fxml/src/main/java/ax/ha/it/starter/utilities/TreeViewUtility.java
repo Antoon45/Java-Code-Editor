@@ -17,9 +17,9 @@ public class TreeViewUtility {
         fileTreeView.setEditable(false);
     }
 
-    EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> { // TODO: Implement code for mouseEventhandler
+    EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> { // TODO: Implement code for mouseEventHandler
         System.out.println(treeItem.getValue());
-    }; // TODO: In this method we want to get the code that is
+    };
 
     public void setRootItem() {
         fileTreeView.setRoot(treeItem);

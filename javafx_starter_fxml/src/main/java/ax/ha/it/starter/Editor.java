@@ -103,8 +103,8 @@ public class Editor {
     }
 
     private void codeExecute(File file) {
-        String compile = "javac ".concat(file.getAbsolutePath());
-        String run = "java ".concat(file.getAbsolutePath()).split("\\.")[0].concat(".class");
+        String compile = "javac -cp src ".concat(file.getAbsolutePath());
+        String run = "java -cp src ".concat(file.getAbsolutePath()).split("\\.")[0];
         System.out.println("java ".concat(file.getAbsolutePath()).split("\\.")[0].concat(".class"));
         System.out.println("java ".concat(file.getAbsolutePath()).split("\\.")[0].concat(".class"));
 
