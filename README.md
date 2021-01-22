@@ -1,1 +1,1 @@
-Skapa ditt/ert projekt här
+Code editor made with JavaFX and RichTextFX
